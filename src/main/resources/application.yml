@@ -1,0 +1,109 @@
+server:
+  port: 8080
+  contextPath: /common
+  endPointPath: endpoints
+  basePath: http://localhost
+  error:
+      path: /error
+      whitelabel:
+          enabled: false
+  ssl:
+    enabled: false
+    key-store: classpath:main.jks
+    key-password: secret
+
+#quartz:
+#    enabled: true
+
+management:
+    context-path: /manage
+    port: 8081
+    ssl:
+        enabled: false
+        key-store: classpath:management.jks
+        key-password: secret
+    address: 127.0.0.1
+    security:
+        enabled: true
+        roles: EPADMIN
+    info:
+        git:
+            mode: full
+#security:
+#    user:
+#        name: epadmin
+#        password: epadmin
+#    basic:
+#        enabled: true
+endpoints:
+    sensitive: true
+    metrics:
+        id: app_metrics
+    health:
+        id: app_health
+    beans:
+        id: app_beans
+    info:
+        id: app_info
+    shutdown:
+        enabled: true
+---
+spring:
+  profiles: prod
+  resources:
+    #staticLocations: classpath:/static/
+    #cachePeriod: 0
+  application:
+      name: REST API newsletter subscription
+      thymeleaf:
+          cache: false
+          enabled: true
+          prefix: classpath:/templates/
+          suffix: .html
+          checkTemplateLocation: true
+          mode: LEGACYHTML5
+          encoding: UTF-8
+          contentType: text/html
+  main:
+      banner-mode: "off"
+  #mail:
+  #    host: localhost
+  #    port: 25
+  #    protocol: smtp
+  #    defaultEncoding: UTF-8
+---
+spring:
+  profiles: local, default
+  resources:
+    #staticLocations: classpath:/static/
+    #cachePeriod: 0
+  metrics:
+    export:
+        enabled: false
+        redis:
+            prefix: metrics.newsletterSub.${spring.application.name:application}.${random.value:0000}
+            key: keys.metrics.newsletterSub
+  application:
+      name: REST API newsletter subscription
+      thymeleaf:
+          cache: false
+          enabled: true
+          prefix: classpath:/templates/
+          suffix: .html
+          checkTemplateLocation: true
+          mode: LEGACYHTML5
+          encoding: UTF-8
+          contentType: text/html
+  jackson:
+    serialization:
+        write_dates_as_timestamps: false
+  main:
+      banner-mode: "console"
+---
+logging:
+    level:
+        org:
+            springframework:
+                web: INFO
+            hibernate: INFO
+            

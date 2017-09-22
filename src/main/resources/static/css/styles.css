@@ -1,0 +1,64 @@
+/* 
+    Created on : Sep 4, 2017, 6:59:56 PM
+    Author     : Alex
+*/
+* {
+    margin: 0;
+    padding: 0;
+}
+p {
+    font-size: 12px;
+    color: #373737;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 18px;
+    padding: 5px 10px 5px 0px;
+}
+p a {
+    color: #218bdc;
+    font-size: 12px;
+    text-decoration: none;
+}
+a {
+    outline: none;
+}
+.f-left {
+    float:left;
+}
+.f-right {
+    float:right;
+}
+.clear {
+    clear: both;
+    overflow: hidden;
+}
+.error {
+    width: 845px;
+    height: 384px;
+    border: 1px solid #cccccc;
+    margin: 72px auto 0;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #fff url(../images/block.gif) no-repeat 0 51px;
+}
+.error .panel {
+    padding: 100px 40px 0 186px;
+}
+
+.error .panel .status {
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.error div h2 {
+    color: #218bdc;
+    font-size: 30px;
+    display: block;
+    padding: 0 0 14px 0;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 12px;
+    font-weight: normal;
+    font-style: italic;
+    font-family: monospace;
+}
