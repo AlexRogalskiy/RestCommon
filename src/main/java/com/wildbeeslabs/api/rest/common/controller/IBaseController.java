@@ -12,18 +12,19 @@ import org.springframework.http.ResponseEntity;
  * @since 2017-08-08
  * @param <T>
  * @param <E>
+ * @param <ID>
  */
-public interface IBaseController<T extends Serializable, E extends Serializable> {
+public interface IBaseController<T extends Serializable, E extends Serializable, ID extends Serializable> {
 
     ResponseEntity<?> getAll();
 
-    ResponseEntity<?> getById(final Long id);
+    ResponseEntity<?> getById(final ID id);
 
     ResponseEntity<?> create(final E item);
 
-    ResponseEntity<?> update(final Long id, final E item);
+    ResponseEntity<?> update(final ID id, final E item);
 
-    ResponseEntity<?> delete(final Long id);
+    ResponseEntity<?> delete(final ID id);
 
     ResponseEntity<?> deleteAll();
 }

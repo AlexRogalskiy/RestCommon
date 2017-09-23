@@ -21,28 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.api.rest.common.utils.security;
+package com.wildbeeslabs.api.rest.common.security;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
+//import com.wildbeeslabs.rest.model.User;
+import java.util.Objects;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
- * CustomAuthenticationEntryPoint REST Application implementation
+ * SpringSecurityAuditorAware REST Application implementation
  *
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
+ * @param <T>
  */
-@Component("customAuthenticationEntryPoint")
-public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class SpringSecurityAuditorAware<T extends User> implements AuditorAware<T> {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    public T getCurrentAuditor() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
+            return null;
+        }
+        //return ((UserDetails) authentication.getPrincipal()).getUser();
+        return null;
     }
 }

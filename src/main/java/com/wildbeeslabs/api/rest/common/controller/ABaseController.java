@@ -6,6 +6,7 @@ import com.wildbeeslabs.api.rest.common.model.IBaseEntity;
 import com.wildbeeslabs.api.rest.common.model.dto.IBaseDTO;
 
 import java.beans.PropertyEditorSupport;
+import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 2017-08-08
  * @param <T>
  * @param <E>
+ * @param <ID>
  * @param <C>
  */
-public abstract class ABaseController<T extends IBaseEntity, E extends IBaseDTO, C extends IBaseProxyController<T, E>> implements IBaseController<T, E> {
+public abstract class ABaseController<T extends IBaseEntity, E extends IBaseDTO, ID extends Serializable, C extends IBaseProxyController<T, E, ID>> implements IBaseController<T, E, ID> {
 
     @Autowired
     protected HttpServletRequest request;
@@ -42,7 +44,7 @@ public abstract class ABaseController<T extends IBaseEntity, E extends IBaseDTO,
     }
 
     @Override
-    public ResponseEntity<?> getById(final Long id) {
+    public ResponseEntity<?> getById(final ID id) {
         return new ResponseEntity<>(getProxyController().getItemById(id), HttpStatus.OK);
     }
 
@@ -56,13 +58,13 @@ public abstract class ABaseController<T extends IBaseEntity, E extends IBaseDTO,
     }
 
     @Override
-    public ResponseEntity<?> update(final Long id, final E itemDto) {
+    public ResponseEntity<?> update(final ID id, final E itemDto) {
         E itemEntity = getProxyController().updateItem(id, itemDto);
         return new ResponseEntity<>(itemEntity, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> delete(final Long id) {
+    public ResponseEntity<?> delete(final ID id) {
         E itemEntity = getProxyController().deleteItem(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

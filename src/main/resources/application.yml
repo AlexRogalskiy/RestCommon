@@ -54,7 +54,7 @@ spring:
     #staticLocations: classpath:/static/
     #cachePeriod: 0
   application:
-      name: REST API newsletter subscription
+      name: REST API Common
       thymeleaf:
           cache: false
           enabled: true

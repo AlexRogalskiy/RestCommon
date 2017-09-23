@@ -49,7 +49,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  * @since 2017-08-08
  */
-@Service("metricService")
+@Service("metricCommonService")
 public class MetricServiceImpl implements IMetricService {
 
     /**

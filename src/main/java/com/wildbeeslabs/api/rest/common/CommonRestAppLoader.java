@@ -21,31 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.wildbeeslabs.api.rest.common.utils.security;
+package com.wildbeeslabs.api.rest.common;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import com.wildbeeslabs.api.rest.common.configuration.SecurityConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 /**
  *
- * UserCredentials REST Application implementation
+ * Initial Common REST Application class loader
  *
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
  */
-public final class UserCredentials extends User {
+@SpringBootApplication(scanBasePackages = {"com.wildbeeslabs.api.rest.common"})
+@Import({SecurityConfiguration.class})
+//@Import({JpaConfiguration.class, SecurityConfiguration.class, AppConfiguration.class, WebConfiguration.class, ValidatorConfiguration.class})
+public class CommonRestAppLoader {
 
-    private final String uuid;
-
-    public UserCredentials(final String username, final String password, final boolean enabled, final Collection<? extends GrantedAuthority> authorities, final String uuidToSet) {
-        super(username, password, enabled, true, true, true, authorities);
-        uuid = uuidToSet;
-    }
-
-    public final String getUuid() {
-        return uuid;
+    public static void main(String[] args) {
+        SpringApplication.run(CommonRestAppLoader.class, args);
     }
 }

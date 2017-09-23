@@ -4,8 +4,7 @@ import com.wildbeeslabs.api.rest.common.model.IBaseEntity;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 
 /**
@@ -18,7 +17,7 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @param <T>
  */
 @NoRepositoryBean
-public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, Long> {
+public interface BaseRepository<T extends IBaseEntity> {
 
     /**
      * Get list of entities created before (including) particular date
@@ -26,8 +25,8 @@ public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, 
      * @param date - request date
      * @return list of entities
      */
-    @Query("select e from #{#entityName} e where e.createdAt <= ?1")
-    List<T> findAllByCreatedAtLessThanEqual(final Date date);
+    //@Query("select e from #{#entityName} e where e.createdAt <= ?1")
+    List<? extends T> findByCreatedAtLessThanEqual(final Date date);
 
     /**
      * Get list of entities created after (excluding) particular date
@@ -35,8 +34,8 @@ public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, 
      * @param date - request date
      * @return list of entities
      */
-    @Query("select e from #{#entityName} e where e.createdAt > ?1")
-    List<T> findAllByCreatedAtGreaterThan(final Date date);
+    //@Query("select e from #{#entityName} e where e.createdAt > ?1")
+    List<? extends T> findByCreatedAtGreaterThan(final Date date);
 
     /**
      * Get list of entities created by date period
@@ -45,8 +44,8 @@ public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, 
      * @param dateTo - end date of period (including)
      * @return list of entities
      */
-    @Query("select e from #{#entityName} e where e.createdAt > ?1 and e.createdAt <= ?2")
-    List<T> findAllByCreatedAtBetween(final Date dateFrom, final Date dateTo);
+    //@Query("select e from #{#entityName} e where e.createdAt > ?1 and e.createdAt <= ?2")
+    List<? extends T> findByCreatedAtBetween(final Date dateFrom, final Date dateTo);
 
     /**
      * Get list of entities created by user
@@ -54,8 +53,8 @@ public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, 
      * @param createdBy - user name who created entities
      * @return list of entities
      */
-    @Query("select e from #{#entityName} e where e.createdBy = ?1")
-    List<T> findAllByCreatedByIgnoreCase(final String createdBy);
+    //@Query("select e from #{#entityName} e where e.createdBy = ?1")
+    List<? extends T> findByCreatedByIgnoreCase(final String createdBy);
 
     /**
      * Get list of entities modified by user
@@ -63,6 +62,6 @@ public interface BaseRepository<T extends IBaseEntity> extends JpaRepository<T, 
      * @param modifiedBy - user name who modified entities
      * @return list of entities
      */
-    @Query("select e from #{#entityName} e where e.modifiedBy = ?1")
-    List<T> findAllByModifiedByIgnoreCase(final String modifiedBy);
+    //@Query("select e from #{#entityName} e where e.modifiedBy = ?1")
+    List<? extends T> findByModifiedByIgnoreCase(final String modifiedBy);
 }

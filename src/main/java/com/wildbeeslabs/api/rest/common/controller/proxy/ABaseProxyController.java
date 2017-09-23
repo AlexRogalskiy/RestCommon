@@ -31,11 +31,13 @@ import com.wildbeeslabs.api.rest.common.model.dto.wrapper.BaseDTOListWrapper;
 import com.wildbeeslabs.api.rest.common.model.dto.converter.DTOConverter;
 import com.wildbeeslabs.api.rest.common.model.dto.IBaseDTO;
 import com.wildbeeslabs.api.rest.common.model.dto.wrapper.IBaseDTOListWrapper;
-import com.wildbeeslabs.api.rest.common.service.interfaces.IBaseService;
 import com.wildbeeslabs.api.rest.common.utils.ResourceUtils;
+import com.wildbeeslabs.api.rest.common.service.interfaces.IJpaBaseService;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+
 import org.apache.commons.lang3.StringUtils;
 
 import org.slf4j.Logger;
@@ -52,9 +54,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2017-08-08
  * @param <T>
  * @param <E>
+ * @param <ID>
  * @param <S>
  */
-public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBaseDTO, S extends IBaseService<T>> implements IBaseProxyController<T, E> {
+public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBaseDTO, ID extends Serializable, S extends IJpaBaseService<T, ID>> implements IBaseProxyController<T, E, ID> {
 
     /**
      * Default Logger instance
@@ -83,7 +86,7 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
         return items;
     }
 
-    public T getEntityItemById(final Long id) {
+    public T getEntityItemById(final ID id) {
         LOGGER.info("Fetching item by id {}", id);
         T item = getService().findById(id);
         if (Objects.isNull(item)) {
@@ -93,7 +96,7 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
     }
 
     @Override
-    public E getItemById(final Long id) {
+    public E getItemById(final ID id) {
         T item = this.getEntityItemById(id);
         return getDTOConverter().convertToDTO(item, getDtoClass());
     }
@@ -114,7 +117,7 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
         return getDTOConverter().convertToDTO(item, getDtoClass());
     }
 
-    public T updateItem(final Long id, final E itemDto, final Class<? extends T> entityClass) {
+    public T updateItem(final ID id, final E itemDto, final Class<? extends T> entityClass) {
         LOGGER.info("Updating item by id {}", id);
         T currentItem = getService().findById(id);
         if (Objects.isNull(currentItem)) {
@@ -126,12 +129,12 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
     }
 
     @Override
-    public E updateItem(final Long id, final E itemDto) {
+    public E updateItem(final ID id, final E itemDto) {
         T item = this.updateItem(id, itemDto, getEntityClass());
         return getDTOConverter().convertToDTO(item, getDtoClass());
     }
 
-    public T deleteEntityItem(final Long id) {
+    public T deleteEntityItem(final ID id) {
         LOGGER.info("Deleting item by id {}", id);
         T item = getService().findById(id);
         if (Objects.isNull(item)) {
@@ -142,7 +145,7 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
     }
 
     @Override
-    public E deleteItem(final Long id) {
+    public E deleteItem(final ID id) {
         T item = this.deleteEntityItem(id);
         return getDTOConverter().convertToDTO(item, getDtoClass());
     }

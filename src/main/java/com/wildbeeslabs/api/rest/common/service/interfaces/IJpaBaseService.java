@@ -8,14 +8,15 @@ import org.springframework.data.domain.Pageable;
 
 /**
  *
- * Base REST Application Service declaration
+ * JPA Base REST Application Service declaration
  *
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
  * @param <T>
+ * @param <ID>
  */
-public interface IBaseService<T extends Serializable> {
+public interface IJpaBaseService<T extends Object, ID extends Serializable> {
 
     static enum DateTypeOrder {
         BEFORE, AFTER;
@@ -25,7 +26,7 @@ public interface IBaseService<T extends Serializable> {
         ASC, DESC;
     }
 
-    T findById(final Long id);
+    T findById(final ID id);
 
     void create(final T item);
 
@@ -35,17 +36,19 @@ public interface IBaseService<T extends Serializable> {
 
     void merge(final T itemTo, final T itemFrom);
 
-    void deleteById(final Long id);
+    void deleteById(final ID id);
 
     void delete(final T item);
 
     void delete(final List<? extends T> item);
 
-    List<T> findAll();
+    List<? extends T> findAll();
 
-    Page<T> findAll(final Pageable pageable);
+    Page<? extends T> findAll(final Pageable pageable);
 
     void deleteAll();
+
+    boolean isExist(final ID id);
 
     boolean isExist(final T item);
 }

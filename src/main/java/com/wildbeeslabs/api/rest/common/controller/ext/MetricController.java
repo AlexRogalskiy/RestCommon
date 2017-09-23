@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0.0
  * @since 2017-08-08
  */
-@RestController
+@RestController("metricCommonController")
 @RequestMapping("/api")
 public class MetricController {
 

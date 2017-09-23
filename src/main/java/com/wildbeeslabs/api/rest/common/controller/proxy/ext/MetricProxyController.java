@@ -39,7 +39,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * @since 2017-08-08
  */
-@Component
+@Component("metricCommonProxyController")
 public class MetricProxyController {
 
     @Autowired

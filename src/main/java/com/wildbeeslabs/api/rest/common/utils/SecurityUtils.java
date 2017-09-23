@@ -23,7 +23,7 @@
  */
 package com.wildbeeslabs.api.rest.common.utils;
 
-import com.wildbeeslabs.api.rest.common.utils.security.UserCredentials;
+import com.wildbeeslabs.api.rest.common.security.UserCredentials;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import java.io.UnsupportedEncodingException;

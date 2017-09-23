@@ -28,6 +28,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,6 +40,7 @@ import org.springframework.stereotype.Component;
  * @since 2017-08-08
  */
 @Component
+//@Service("resourceUtils")
 public final class ResourceUtils {
 
     @Autowired

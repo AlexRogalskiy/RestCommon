@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version 1.0.0
  * @since 2017-08-08
  */
-@Controller
-public class DefaultRestController {
+@Controller("defaultCommonController")
+public class DefaultCommonController {
 
     @Value("${spring.application.name}")
     private String appName;
 
-    @RequestMapping(value = "/api", method = RequestMethod.GET)
+    @RequestMapping(value = "/apic", method = RequestMethod.GET)
     public String homePage(final Model model) {
         model.addAttribute("appName", appName);
         return "home";

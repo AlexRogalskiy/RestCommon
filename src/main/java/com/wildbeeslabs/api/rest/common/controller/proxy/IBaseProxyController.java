@@ -38,20 +38,21 @@ import java.util.List;
  * @since 2017-08-08
  * @param <T>
  * @param <E>
+ * @param <ID>
  */
-public interface IBaseProxyController<T extends Serializable, E extends Serializable> {
+public interface IBaseProxyController<T extends Serializable, E extends Serializable, ID extends Serializable> {
 
     IBaseDTOListWrapper<? extends E> getAllItems() throws EmptyContentException;
 
-    E getItemById(final Long id);
+    E getItemById(final ID id);
 
     //T createItem(final E itemDto, Class<? extends T> entityClass);
     E createItem(final E itemDto);
 
-    E updateItem(final Long id, final E itemDto);
-    //T updateItem(final Long id, final E itemDto, Class<? extends T> entityClass);
+    E updateItem(final ID id, final E itemDto);
+    //T updateItem(final ID id, final E itemDto, Class<? extends T> entityClass);
 
-    E deleteItem(final Long id);
+    E deleteItem(final ID id);
 
     void deleteItems(final List<? extends E> itemDtoList);
 
