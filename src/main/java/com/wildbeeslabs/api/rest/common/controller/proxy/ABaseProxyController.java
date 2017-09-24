@@ -32,7 +32,6 @@ import com.wildbeeslabs.api.rest.common.model.dto.converter.DTOConverter;
 import com.wildbeeslabs.api.rest.common.model.dto.IBaseDTO;
 import com.wildbeeslabs.api.rest.common.model.dto.wrapper.IBaseDTOListWrapper;
 import com.wildbeeslabs.api.rest.common.utils.ResourceUtils;
-import com.wildbeeslabs.api.rest.common.service.interfaces.IJpaBaseService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,6 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import com.wildbeeslabs.api.rest.common.service.interfaces.IBaseService;
 
 /**
  *
@@ -57,7 +57,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @param <ID>
  * @param <S>
  */
-public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBaseDTO, ID extends Serializable, S extends IJpaBaseService<T, ID>> implements IBaseProxyController<T, E, ID> {
+public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBaseDTO, ID extends Serializable, S extends IBaseService<T, ID>> implements IBaseProxyController<T, E, ID> {
 
     /**
      * Default Logger instance

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.data.domain.Sort;
  * @param <T>
  * @param <ID>
  */
-public interface IMongoBaseService<T extends Serializable, ID extends Serializable> {
+public interface IMongoBaseService<T extends Object, ID extends Serializable> {
 
     static enum DateTypeOrder {
         BEFORE, AFTER;

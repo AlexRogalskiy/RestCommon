@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
  * @param <T>
  * @param <ID>
  */
-public interface IJpaBaseService<T extends Object, ID extends Serializable> {
+public interface IBaseService<T extends Object, ID extends Serializable> {
 
     static enum DateTypeOrder {
         BEFORE, AFTER;
