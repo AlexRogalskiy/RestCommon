@@ -35,7 +35,6 @@ import com.wildbeeslabs.api.rest.common.utils.ResourceUtils;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.wildbeeslabs.api.rest.common.service.interfaces.IBaseService;
+import java.util.Optional;
 
 /**
  *
@@ -88,11 +88,11 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
 
     public T getEntityItemById(final ID id) {
         LOGGER.info("Fetching item by id {}", id);
-        T item = getService().findById(id);
-        if (Objects.isNull(item)) {
+        Optional<T> item = getService().findById(id);
+        if (!item.isPresent()) {
             throw new ResourceNotFoundException(getResource().formatMessage("error.no.item.id", id));
         }
-        return item;
+        return item.get();
     }
 
     @Override
@@ -119,13 +119,13 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
 
     public T updateItem(final ID id, final E itemDto, final Class<? extends T> entityClass) {
         LOGGER.info("Updating item by id {}", id);
-        T currentItem = getService().findById(id);
-        if (Objects.isNull(currentItem)) {
+        Optional<T> currentItem = getService().findById(id);
+        if (!currentItem.isPresent()) {
             throw new ResourceNotFoundException(getResource().formatMessage("error.no.item.id", id));
         }
         T itemEntity = getDTOConverter().convertToEntity(itemDto, entityClass);
-        getService().merge(currentItem, itemEntity);
-        return currentItem;
+        getService().merge(currentItem.get(), itemEntity);
+        return currentItem.get();
     }
 
     @Override
@@ -136,12 +136,12 @@ public abstract class ABaseProxyController<T extends IBaseEntity, E extends IBas
 
     public T deleteEntityItem(final ID id) {
         LOGGER.info("Deleting item by id {}", id);
-        T item = getService().findById(id);
-        if (Objects.isNull(item)) {
+        Optional<T> item = getService().findById(id);
+        if (!item.isPresent()) {
             throw new ResourceNotFoundException(getResource().formatMessage("error.no.item.id", id));
         }
         getService().deleteById(id);
-        return item;
+        return item.get();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.wildbeeslabs.api.rest.common.service.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 //import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public interface IMongoBaseService<T extends Object, ID extends Serializable> {
 
     List<? extends T> findAll(final Sort sort);
 
-    T insert(T item);
+    Optional<T> insert(final T item);
 
     List<? extends T> insert(final Iterable<? extends T> iterables);
 
@@ -40,7 +41,7 @@ public interface IMongoBaseService<T extends Object, ID extends Serializable> {
 
     List<? extends T> findAll(final Example<? extends T> example, final Sort sort);
 
-    /*T findById(final ID id);
+    /*Optional<T> findById(final ID id);
 
     void create(final T item);
 

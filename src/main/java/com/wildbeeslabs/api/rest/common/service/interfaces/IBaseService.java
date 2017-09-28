@@ -2,6 +2,7 @@ package com.wildbeeslabs.api.rest.common.service.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ public interface IBaseService<T extends Object, ID extends Serializable> {
         ASC, DESC;
     }
 
-    T findById(final ID id);
+    Optional<T> findById(final ID id);
 
     void create(final T item);
 

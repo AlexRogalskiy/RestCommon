@@ -1,11 +1,13 @@
 package com.wildbeeslabs.api.rest.common.repository;
 
 import com.wildbeeslabs.api.rest.common.model.IBaseEntity;
+
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-//import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.scheduling.annotation.Async;
 
 /**
  *
@@ -25,8 +27,9 @@ public interface BaseRepository<T extends IBaseEntity> {
      * @param date - request date
      * @return list of entities
      */
-    //@Query("select e from #{#entityName} e where e.createdAt <= ?1")
-    List<? extends T> findByCreatedAtLessThanEqual(final Date date);
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.createdAt <= ?1")
+    @Async
+    CompletableFuture<List<? extends T>> findByCreatedAtLessThanEqual(final Date date);
 
     /**
      * Get list of entities created after (excluding) particular date
@@ -34,8 +37,9 @@ public interface BaseRepository<T extends IBaseEntity> {
      * @param date - request date
      * @return list of entities
      */
-    //@Query("select e from #{#entityName} e where e.createdAt > ?1")
-    List<? extends T> findByCreatedAtGreaterThan(final Date date);
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.createdAt > ?1")
+    @Async
+    CompletableFuture<List<? extends T>> findByCreatedAtGreaterThan(final Date date);
 
     /**
      * Get list of entities created by date period
@@ -44,8 +48,9 @@ public interface BaseRepository<T extends IBaseEntity> {
      * @param dateTo - end date of period (including)
      * @return list of entities
      */
-    //@Query("select e from #{#entityName} e where e.createdAt > ?1 and e.createdAt <= ?2")
-    List<? extends T> findByCreatedAtBetween(final Date dateFrom, final Date dateTo);
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.createdAt > ?1 AND e.createdAt <= ?2")
+    @Async
+    CompletableFuture<List<? extends T>> findByCreatedAtBetween(final Date dateFrom, final Date dateTo);
 
     /**
      * Get list of entities created by user
@@ -53,8 +58,9 @@ public interface BaseRepository<T extends IBaseEntity> {
      * @param createdBy - user name who created entities
      * @return list of entities
      */
-    //@Query("select e from #{#entityName} e where e.createdBy = ?1")
-    List<? extends T> findByCreatedByIgnoreCase(final String createdBy);
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.createdBy = ?1")
+    @Async
+    CompletableFuture<List<? extends T>> findByCreatedByIgnoreCase(final String createdBy);
 
     /**
      * Get list of entities modified by user
@@ -62,6 +68,7 @@ public interface BaseRepository<T extends IBaseEntity> {
      * @param modifiedBy - user name who modified entities
      * @return list of entities
      */
-    //@Query("select e from #{#entityName} e where e.modifiedBy = ?1")
-    List<? extends T> findByModifiedByIgnoreCase(final String modifiedBy);
+    //@Query("SELECT e FROM #{#entityName} e WHERE e.modifiedBy = ?1")
+    @Async
+    CompletableFuture<List<? extends T>> findByModifiedByIgnoreCase(final String modifiedBy);
 }
