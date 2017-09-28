@@ -34,7 +34,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 /**
  *
- * PropertiesUtils implementation
+ * PropertiyUtils implementation
  *
  * @author Alex
  * @version 1.0.0
@@ -42,7 +42,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  */
 //@ImportResource("classpath:jobs.properties")
 //@PropertySource({"classpath:jobs.properties"})
-public final class PropertiesUtils extends PropertyPlaceholderConfigurer implements Serializable {
+public final class PropertiyUtils extends PropertyPlaceholderConfigurer implements Serializable {
 
     private static Map<String, String> propsMap;
 

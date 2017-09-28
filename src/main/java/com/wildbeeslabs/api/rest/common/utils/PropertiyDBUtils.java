@@ -31,15 +31,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
- * PropertiesDBUtils implementation
+ * PropertiyDBUtils implementation
  *
  * @author Alex
  * @version 1.0.0
  * @since 2017-08-08
  */
-public final class PropertiesDBUtils extends Properties {
+public final class PropertiyDBUtils extends Properties {
 
-    public PropertiesDBUtils(final DataSource dataSource) {
+    public PropertiyDBUtils(final DataSource dataSource) {
         super();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> configs = jdbcTemplate.queryForList("select config_key, config_value from config_params");
